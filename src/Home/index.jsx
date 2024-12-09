@@ -1,19 +1,26 @@
 import { useState } from "react";
 import Header from "../Header";
-import "./home.css"; // Assuming you have a CSS file for styling
+import {
+  CenteredContainer,
+  InputElement,
+  FormContainer,
+  ButtonElement,
+  LabelElement,
+} from "../../style";
+import ShowImage from "../Show Image/index.jsx";
+import { HomeImgElement, HomeContainer } from "./home.js";
+
 
 const Home = () => {
-  const [serialNumber, setSerialNumber] = useState(""); // State to store the serial number
-  const [image, setImage] = useState(null); // State to store the fetched image
+  const [serialNumber, setSerialNumber] = useState("");
+  const [image, setImage] = useState(null);
 
-  // Handle serial number input change
   const handleInputChange = (e) => {
     setSerialNumber(e.target.value);
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
+    e.preventDefault();
 
     if (!serialNumber) {
       alert("Please enter a serial number.");
@@ -21,18 +28,18 @@ const Home = () => {
     }
 
     try {
-      // Send POST request to the backend
-      const response = await fetch(`http://localhost:3000/file/images`,{method:'POST',headers:{'Content-Type': 'application/json'},body:JSON.stringify({serialNumber,})})
-      
-
-      if (response.ok) {
-        // const result = await response.json();
-        const result = await response.json()
-        
-        // Assuming the result contains the image path or data
-        setImage(result.file_path); // Assuming the server sends the image URL
+      const response = await fetch(`http://localhost:3000/file/images`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ serialNumber }),
+      });
+      console.log(response);
+      if (response.status === 200) {
+        const result = await response.json();
+        setImage(result.file_path);
       } else {
-        alert("No image found for this serial number.");
+        const result = await response.json();
+        alert(result.message);
         setImage(null);
       }
     } catch (error) {
@@ -42,25 +49,20 @@ const Home = () => {
   };
 
   return (
-    <div className="home-bg">
+    <HomeContainer>
       <Header />
-      <form onSubmit={handleSubmit}className="home-form-container">
-        <input
-          type="text"
-          className="home-input"
-          placeholder="Enter Product Serial Number"
-          value={serialNumber}
-          onChange={handleInputChange}
-        />
-        <button type="submit">Get Image</button>
-      </form>
 
-      {image && (
-        <div className="image-container">
-          <img src={`http://localhost:3000${image}`} alt="Product" className="product-image" />
-        </div>
-      )}
-    </div>
+      <FormContainer onSubmit={handleSubmit}>
+        <LabelElement>CERTIFICATE SERIAL NUMBER</LabelElement>
+        <InputElement
+          onChange={handleInputChange}
+          placeholder="CERTIFICATE SERIAL NUBER"
+        ></InputElement>
+        <ButtonElement type="submit">VIEW</ButtonElement>
+      </FormContainer>
+
+      {image && (<ShowImage filePath={image}/>) }
+    </HomeContainer>
   );
 };
 

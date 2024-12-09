@@ -3,3 +3,10 @@
   padding: 0px;
   margin: 0px;
 }
+
+.root {
+  background-color: #7bd9f6a2;
+  min-height: 100vh;
+}
+
+
