@@ -1,19 +1,19 @@
 import { useState } from "react";
 import Header from "../Header";
 import {
-  CenteredContainer,
   InputElement,
   FormContainer,
   ButtonElement,
   LabelElement,
 } from "../../style";
 import ShowImage from "../Show Image/index.jsx";
-import { HomeImgElement, HomeContainer } from "./home.js";
+import { HomeContainer } from "./home.js";
+
 
 
 const Home = () => {
   const [serialNumber, setSerialNumber] = useState("");
-  const [image, setImage] = useState(null);
+  const [filePath, setFilePath] = useState(null);
 
   const handleInputChange = (e) => {
     setSerialNumber(e.target.value);
@@ -36,11 +36,11 @@ const Home = () => {
       console.log(response);
       if (response.status === 200) {
         const result = await response.json();
-        setImage(result.file_path);
+        setFilePath(result.file_path);
       } else {
         const result = await response.json();
         alert(result.message);
-        setImage(null);
+        setFilePath(null);
       }
     } catch (error) {
       console.error("Error fetching image:", error);
@@ -54,6 +54,7 @@ const Home = () => {
 
       <FormContainer onSubmit={handleSubmit}>
         <LabelElement>CERTIFICATE SERIAL NUMBER</LabelElement>
+        <p>eg: xx/xxxx/xxxx</p>
         <InputElement
           onChange={handleInputChange}
           placeholder="CERTIFICATE SERIAL NUBER"
@@ -61,7 +62,7 @@ const Home = () => {
         <ButtonElement type="submit">VIEW</ButtonElement>
       </FormContainer>
 
-      {image && (<ShowImage filePath={image}/>) }
+      {filePath && (<ShowImage filePath={filePath}/>) }
     </HomeContainer>
   );
 };

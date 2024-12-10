@@ -10,7 +10,7 @@ const Header = () => {
   const logout = () => {
     Cookies.remove('jwt_token');
     console.log('aaa');
-    navigate('/admin/login');
+    navigate('/login');
   };
 
   return (
@@ -21,7 +21,7 @@ const Header = () => {
 
       
       {location.pathname.startsWith('/admin') && (
-        <ButtonElement onClick={logout}>LOG OUT</ButtonElement>
+        <ButtonElement backgruoundcolor="#DD0023" onClick={logout}>LOG OUT</ButtonElement>
       )}
     </HeaderContainer>
   );

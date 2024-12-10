@@ -17,3 +17,26 @@ export const SearchIcon = styled.button`
   background-color: blue;
   } 
 `;
+
+
+
+export const SearchWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+export const SearchInput = styled.input`
+  padding: 8px;
+  border: none;
+  outline: none;
+  flex-grow: 1;
+`;
+
+export const SearchButton = styled.button`
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+`;
