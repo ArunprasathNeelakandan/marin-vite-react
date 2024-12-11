@@ -1,5 +1,5 @@
 import { SerialDeatailCart } from "./ImageDetailes.js";
-import { ButtonElement } from "../../../style.js";
+import { ButtonElement,CenteredContainer } from "../../../style.js";
 import { jwtToken } from "../../commonFunction.js";
 import { toast } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -26,7 +26,8 @@ const ImageDetailes = (props) => {
 
   return (
     <SerialDeatailCart key={each.serialNumber}>
-      <p>{each.serial_number}</p>
+      <p style={{margin:"auto 0"}}>{each.serial_number}</p>
+
       <ButtonElement
         backgruoundcolor="#DD0023"
         onClick={() => handleDelete(each.serial_number)}

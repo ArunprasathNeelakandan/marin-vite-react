@@ -1,13 +1,26 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 
+const shack = keyframes`
+  0% {
+    transform: translateX(-100%); /* Start off-screen and rotated */
+    opacity: 0; /* Start invisible */
+  }
+     70% {
+    transform: translateX(+30px); /* Start off-screen and rotated */
+    opacity: 0.9; /* Start invisible */
+  }
+  100% {
+    transform: translateX(0) ; /* End at normal position with no rotation */
+    opacity: 1; /* Fully visible */
+  }
+`;
 export const LogoInput = styled.img`
     height: 50px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     transition: 0.2s;
-
     &:hover{
     transform: scale(1.1);
     transition-duration: 0.2s;
+    
     }
 `
 export const HeaderContainer = styled.div`
@@ -19,4 +32,5 @@ export const HeaderContainer = styled.div`
     padding-top: 10px;
     padding-bottom: 10px;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    align-items: center;
 `

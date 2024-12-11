@@ -1,24 +1,3 @@
-// import styled from "styled-components";
-
-// export const SerialDeatailCart = styled.div`
-//   display: flex;
-//   padding: 10px 20px;
-//   background-color: #0b69ff;
-//   color: #ffffff;
-//   width: calc(25% - 10px);
-//   align-items: center;
-//   margin: 10px 5px 10px 5px;
-//   justify-content: space-between;
-//   border-radius: 10px;
-
-//   @media (max-width: 768px) {
-//     width: calc(50% - 10px); /* 2 items per row on medium devices */
-//   }
-
-//   @media (max-width: 576px) {
-//     width: 100%;
-//   }
-// `;
 
 import styled, { keyframes } from "styled-components";
 
@@ -37,13 +16,15 @@ const slideInAndRotate = keyframes`
 export const SerialDeatailCart = styled.div`
   display: flex;
   padding: 10px 20px;
-  background-color: #0b69ff;
+  background-color: #1A3059;
   color: #ffffff;
   width: calc(25% - 10px);
   align-items: center;
   margin: 10px 5px 10px 5px;
   justify-content: space-between;
   border-radius: 10px;
+  border: solid 1px #fff;
+  height: 50px;
   animation: ${slideInAndRotate} 0.5s ease-out forwards; /* Apply animation */
 
   @media (max-width: 768px) {

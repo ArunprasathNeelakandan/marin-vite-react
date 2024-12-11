@@ -1,9 +1,20 @@
-import styled from "styled-components";
+import styled,{keyframes} from "styled-components";
 
 export const InputElement = styled.input`
   padding: 5px 10px;
   display: ${(props) => props.display} || block;
   margin: 10px 0px 20px;
+`;
+
+const slideInAndRotate = keyframes`
+  0% {
+    transform: translateX(-100%) rotate(-180deg); /* Start off-screen and rotated */
+    opacity: 0; /* Start invisible */
+  }
+  100% {
+    transform: translateX(0) rotate(0deg); /* End at normal position with no rotation */
+    opacity: 1; /* Fully visible */
+  }
 `;
 
 export const ButtonElement = styled.button`
@@ -25,7 +36,7 @@ export const ButtonElement = styled.button`
 `;
 
 export const FormContainer = styled.form`
-  border: solid 2px #de0122;
+  border: solid 2px #fff;
   max-width: max-content;
   padding: 20px 40px;
   margin: 10px auto;
@@ -33,11 +44,12 @@ export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #0b69ff;
+  background-color: #1A3059;
   flex-shrink: 0;
   color: #fff;
   text-align: center;
-  border-radius: 15px;
+  border-radius: 15px; 
+  animation: ${slideInAndRotate} 0.5s ease-out forwards;
 `;
 
 export const LabelElement = styled.label`
@@ -58,3 +70,4 @@ export const WarningMsg = styled.p`
   font-size: 1.1rem;
   margin: 10px;
 `;
+

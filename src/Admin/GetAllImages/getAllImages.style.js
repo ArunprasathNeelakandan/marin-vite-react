@@ -6,4 +6,12 @@ export const SerialDeatailCartContainer = styled.div`
   flex-wrap: wrap;
   margin: 20px 5% 20px 5%;
   width:90%;
+  min-height: 30vh;
+  
+
 `
+
+export const PageContainer = styled.div`
+  padding: 5px 10px;
+`
+
