@@ -31,7 +31,7 @@ const Admin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file || !serialNumber)
-      return toast.error("Please provide both an ID and a file.");
+      return toast.warn("Please provide both an ID and a file.");
 
     const formData = new FormData();
     formData.append("file", file);
@@ -44,33 +44,37 @@ const Admin = () => {
         body: formData,
       });
       const result = await res.json();
-      res.ok
-        ? (toast.success("File uploaded successfully!"),
-          (fileInputRef.current.value = ""),
-          setSerialNumber(""),
-          setFile(null))
-          
-        : toast.error(result.message);
+      if (res.ok) {
+        toast.success("File uploaded successfully!");
+        fileInputRef.current.value = "";
+        setSerialNumber("");
+        setFile(null);
+      } else {
+        toast.error(result.message);
+      }
     } catch (error) {
-      console.log(error);
-      toString.error(error);
+      console.error(error);
+      toast.error("An error occurred during file upload.");
     }
   };
 
   const assignFilePath = (value) => {
+    console.log("Assigned File Path:", value);
     setFilePath(value);
   };
 
   const setAlertMsg = (result, msg) => {
     if (result === "success") {
       toast.success(msg);
-    } else toast.error(msg);
+    } else {
+      toast.error(msg);
+    }
   };
 
   return (
     <>
       <Header />
-      <div style={{display:'flex', flexDirection:"column"}}>
+      <div style={{ display: "flex", flexDirection: "column" }}>
         <CenteredContainer>
           <FormContainer onSubmit={handleSubmit}>
             <LabelElement>CERTIFICATE & PRODUCT SERIAL NUMBER</LabelElement>
@@ -86,24 +90,26 @@ const Admin = () => {
               ref={fileInputRef}
             />
             <CenteredContainer>
-              <ButtonElement backgruoundcolor="#DD0023" type="submit">Add</ButtonElement>
+              <ButtonElement backgroundcolor="#DD0023" type="submit">
+                Add
+              </ButtonElement>
             </CenteredContainer>
-            <ToastContainer
-              position="top-center"
-              style={{
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                position: "fixed",
-              }}
-            />
           </FormContainer>
+          <ToastContainer
+            position="top-center"
+            style={{
+              top: "50%",
+              zIndex: 9999,
+            }}
+          />
           <SearchBar
             setAlertMsg={setAlertMsg}
             assignFilePath={assignFilePath}
-          ></SearchBar>
+          />
         </CenteredContainer>
-        {filePath && <ShowImage filePath={filePath} />}
+        {filePath && (
+          <ShowImage filePath={filePath} assignFilePath={assignFilePath} />
+        )}
         <GetAllImages setAlertMsg={setAlertMsg} />
       </div>
     </>

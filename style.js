@@ -37,6 +37,7 @@ export const FormContainer = styled.form`
   flex-shrink: 0;
   color: #fff;
   text-align: center;
+  border-radius: 15px;
 `;
 
 export const LabelElement = styled.label`
@@ -49,6 +50,7 @@ export const CenteredContainer = styled.div`
   align-items: center;
   width: 100%;
   flex-wrap: wrap;
+  margin: 20px auto;
 `;
 
 export const WarningMsg = styled.p`

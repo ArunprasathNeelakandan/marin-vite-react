@@ -1,10 +1,11 @@
 import { SerialDeatailCart } from "./ImageDetailes.js";
-import { ButtonElement, CenteredContainer } from "../../../style.js";
+import { ButtonElement } from "../../../style.js";
 import { jwtToken } from "../../commonFunction.js";
+import { toast } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const ImageDetailes = (props) => {
-  const { setAlertMsg, each } = props;
+  const { each } = props;
 
   const handleDelete = async (serialNumber) => {
     try {
@@ -17,9 +18,9 @@ const ImageDetailes = (props) => {
         body: JSON.stringify({ serialNumber }),
       });
       const result = await res.json();
-      setAlertMsg("success", result.message);
+      toast.success( result.message);
     } catch (error) {
-      setAlertMsg("error", "Error deleting file");
+      toast.error("Error deleting file");
     }
   };
 

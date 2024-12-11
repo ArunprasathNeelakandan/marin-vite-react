@@ -13,4 +13,7 @@ export const HomeContainer = styled.div`
     display: flex;
     flex-direction: column;
     height: 100vh;  /* Take the full height of the viewport */
+    background-image: url("../assets/bg-ship.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 `

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiSearch } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 import {
   SearchButton,
@@ -23,15 +23,17 @@ const SearchBar = (props) => {
     assignFilePath("");
   }
 
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!serialNumber) {
-      alert("Please enter a serial number.");
+      toast.warn("Please enter a serial number.");
       return;
     }
 
-    try {
+    
       const response = await fetch(`http://localhost:3000/file/images`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -40,14 +42,15 @@ const SearchBar = (props) => {
       if (response.status === 200) {
         const result = await response.json();
         assignFilePath(result.file_path);
+        return ;
       } else {
         const result = await response.json();
-        alert(result.message);
+        toast.error(result.message);
         setImage(null);
+        return;
       }
-    } catch (error) {
-      alert("Error fetching image");
-    }
+      return ;
+    
   };
 
   return (
@@ -60,6 +63,7 @@ const SearchBar = (props) => {
           onChange={handleInputChange}
           type="search"
           display="inline"
+          value={serialNumber}
         />
         <SearchButton type="submit" value={serialNumber}>
           🔍
