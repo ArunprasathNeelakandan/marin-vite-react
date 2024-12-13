@@ -4,17 +4,29 @@
   margin: 0px;
 }
 
+/*  */
+
+
+
 .root {
-  /* background-color: #7bd9f6a2; */
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-image: url('./assets/img2.jpg');
-  background-position: center;
+  background-image: url('.\assets\bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
+  min-height: 100vh;
   background-attachment: fixed;
-   font-family: 'Poppins'
 }
 
+@media screen and (orientation: portrait) {
+  .root {
+    background-image: url('.\assets\bg2.jpg');
+  }
+}
+
+.overlay-class {
+  backdrop-filter: none;
+  background: transparent;
+  display: none;
+  background: transparent !important;
+}
 
