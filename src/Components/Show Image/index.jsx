@@ -39,7 +39,7 @@ const ShowImage = (props) => {
         <img
           src={`http://localhost:3000${filePath}`}
           alt="Popup"
-          style={{ maxWidth: "90%", maxHeight: "100%" }}
+          style={{ maxWidth: "90%",  maxHeight: "95%"}}
         />
         <br />
         <CenteredContainer>

@@ -97,5 +97,6 @@ export const LogoInput = styled.img`
 `
 export const RowCenterContainer = styled.div`
     display:flex;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-right: 10%;
 `

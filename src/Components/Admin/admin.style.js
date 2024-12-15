@@ -59,7 +59,8 @@ export const StyledTable = styled.table`
 
   td {
     padding: 5px 10px;
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
+    margin: 1px 1px 1px px;
 
   }
 

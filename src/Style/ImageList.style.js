@@ -50,10 +50,9 @@ export const PageContainer = styled.div`
 `
 
 export const ListPageArrowContainer =styled.div `
-    position: absolute;
-    bottom: 20px;
     display: flex;
-    justify-content: center;
-    margin: 0 auto;
+    justify-content: center;   
+    position: absolute;
+    top: 90%;
 `
 
