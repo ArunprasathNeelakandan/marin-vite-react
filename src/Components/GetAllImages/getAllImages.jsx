@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
 import { getImages, deleteFile } from "../../Services/api";
 import './hide.css'
+
 import {
-  SerialDeatailCartContainer,
   PageContainer,
-  SerialDeatailCart,
+  ListPageArrowContainer
 } from "../../Style/ImageList.style";
+import ShowImage from '../Show Image/index'
 import { toast } from "react-toastify";
-import { ButtonElement, CenteredContainer } from "../../Style/style";
+import { ButtonElement, RowCenterContainer } from "../../Style/style";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { TableContainer,StyledTable } from "../Admin/admin.style";
 
 const GetAllImages = (props) => {
   const [images, setImages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [filePath,setFilePath] = useState('')
   const itemsPerPage = 8;
   const { triggerFetchData } = props;
 
@@ -99,39 +102,58 @@ const GetAllImages = (props) => {
     }
   };
 
+  const assignFilePath = (value) => {
+    setFilePath(value);
+  };
+
+
+
   const isNextDisabled = images.length < itemsPerPage;
   const isPrevDisabled = currentPage === 1;
 
   return (
-    <CenteredContainer>
-      <SerialDeatailCartContainer>
-        {images.map((each, index) => (
-          <SerialDeatailCart key={each.serial_number}>
-            <p style={{ margin: "auto 0" }}>{each.serial_number}</p>
-
-            <ButtonElement
-              backgruoundcolor="#DD0023"
-              onClick={() => {
+    <>
+    <TableContainer>
+    <StyledTable>
+      <thead>
+        <tr>
+          <th>Serial Number</th>
+          <th>Date</th>
+          <th>View</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+      {images.map((each, index) => (
+          <tr key={index}>
+          <td>{each.serial_number}</td>
+          <td>{each.serial_number_add_time.split(" ")[0]}</td>
+          <td><button className="view-btn" onClick={()=>{setFilePath(each.file_path)}}>View</button></td>
+          <td><button onClick={() => {
                 handleConfirm(each.serial_number);
-              }}
-            >
-              Delete
-            </ButtonElement>
-          </SerialDeatailCart>
+              }}  className="delete-btn">Delete</button></td>
+        </tr>
         ))}
-      </SerialDeatailCartContainer>
-      <CenteredContainer>
-        <ButtonElement id="left" onClick={prevPage} disabled={isPrevDisabled}>
+      </tbody>
+    </StyledTable>
+    </TableContainer>
+        <RowCenterContainer>
+        <ListPageArrowContainer>
+      <ButtonElement id="left" onClick={prevPage} disabled={isPrevDisabled}>
           <FaArrowLeft />
         </ButtonElement>
         <PageContainer>
-          <h1 style={{ color: "black" }}>{currentPage}</h1>
+          <h1 style={{ color: "#fff" }}>{currentPage}</h1>
         </PageContainer>
         <ButtonElement id="right" onClick={nextPage} disabled={isNextDisabled}>
           <FaArrowRight />
         </ButtonElement>
-      </CenteredContainer>
-    </CenteredContainer>
+      </ListPageArrowContainer>
+        </RowCenterContainer>
+    {
+      filePath && (<ShowImage filePath={filePath} assignFilePath={assignFilePath} />)
+    }
+  </>
   );
 };
 

@@ -49,4 +49,11 @@ export const PageContainer = styled.div`
   padding: 5px 10px;
 `
 
+export const ListPageArrowContainer =styled.div `
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+`
 

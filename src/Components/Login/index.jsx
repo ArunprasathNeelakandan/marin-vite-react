@@ -26,7 +26,7 @@ const Login = (props) => {
   };
 
   const onSubmitSuccess = (jwt_token) => {
-    Cookies.set("jwt_token", jwt_token, { expires: 1 });
+    Cookies.set(process.env.JWT_COOKIE_NMAE, jwt_token, { expires: 1 });
     setIsError(false);
     navigate("/admin");
   };
@@ -46,7 +46,7 @@ const Login = (props) => {
   const renderUsernameField = () => {
     return (
       <>
-        {Cookies.get('jwt_token') && (<Navigate to='/admin' replace />)}
+        {Cookies.get(process.env.JWT_COOKIE_NMAE) && (<Navigate to='/admin' replace />)}
         <label className="input-label" htmlFor="username">
           USER NAME
         </label>

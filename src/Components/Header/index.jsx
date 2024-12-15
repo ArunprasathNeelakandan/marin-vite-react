@@ -42,7 +42,7 @@ const Header = () => {
 
   const logout = () => {
     // Remove token and navigate only once
-    Cookies.remove('jwt_token');
+    Cookies.remove(process.env.JWT_COOKIE_NMAE);
     navigate('/login', { replace: true });
   };
 

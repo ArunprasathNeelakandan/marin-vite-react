@@ -25,8 +25,13 @@
 
 .overlay-class {
   backdrop-filter: none;
-  background: transparent;
+  background: rgba(89, 107, 139, 0.259);
   display: none;
   background: transparent !important;
+}
+
+.aaa {
+  
+  margin-bottom: 40px;
 }
 

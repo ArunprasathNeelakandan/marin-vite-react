@@ -1,11 +1,13 @@
 import { useState, useRef } from "react";
-import Header from "../Header/index.jsx";
+import GetAllImages from "../GetAllImages/getAllImages.jsx";
 import Cookies from "js-cookie";
+import logo from '../../assets/unique marine.png'
+import { AdminSideparAndImagePar, HeaderContainer,  AdminBg,  SidePar, ImageTablesContainer } from "./admin.style.js";
 import { ToastContainer, toast } from "react-toastify";
-import { uploadFile,getImageByNumber } from "../../Services/api.js";
+import { uploadFile, getImageByNumber } from "../../Services/api.js";
 import "react-toastify/dist/ReactToastify.css";
 import ShowImage from "../Show Image/index.jsx";
-import GetAllImages from "../GetAllImages/getAllImages.jsx";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   SearchWrapper,
   SearchButton,
@@ -17,6 +19,7 @@ import {
   ButtonElement,
   FormContainer,
   LabelElement,
+  LogoInput
 } from "../../Style/style.js";
 
 const Admin = () => {
@@ -26,8 +29,15 @@ const Admin = () => {
   const [searchSerialNumber, setSearchSerialNumber] = useState("");
   const [triggerFetchData, setTriggerFetchData] = useState(false);
   const fileInputRef = useRef(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const jwtToken = Cookies.get("jwt_token");
+  const logout = () => {
+    Cookies.remove(process.env.JWT_COOKIE_NMAE);
+    navigate('/login', { replace: true });
+  };
+
+  const jwtToken = Cookies.get(process.env.JWT_COOKIE_NMAE);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +48,7 @@ const Admin = () => {
     formData.append("file", file);
     formData.append("serialNumber", serialNumber);
 
-    const response = await uploadFile(formData, jwtToken);
+    const response = await uploadFile(formData);
     if (response.success) {
       toast.success("File uploaded successfully!");
       fileInputRef.current.value = "";
@@ -70,39 +80,10 @@ const Admin = () => {
 
   return (
     <>
-      <Header />
-      <div>
-        <CenteredContainer>
-          <FormContainer onSubmit={handleSubmit}>
-            <LabelElement>CERTIFICATE & PRODUCT SERIAL NUMBER</LabelElement>
-            <InputElement
-              onChange={(e) => setSerialNumber(e.target.value)}
-              placeholder="SERIAL NUMBER"
-              value={serialNumber}
-            />
-            <LabelElement>CERTIFICATE</LabelElement>
-            <InputElement
-              onChange={(e) => setFile(e.target.files[0])}
-              type="file"
-              ref={fileInputRef}
-            />
-            <CenteredContainer>
-              <ButtonElement backgruoundcolor="green" type="submit">
-                Add
-              </ButtonElement>
-            </CenteredContainer>
-          </FormContainer>
-          <ToastContainer
-            position="top-center"
-            style={{
-              top: "50%",
-              zIndex: 9999,
-            }}
-          />
-
+      <AdminBg>
+        <HeaderContainer>
+          <LogoInput src={logo} />
           <FormContainer onSubmit={handleSearchSubmit}>
-            <LabelElement>CERTIFICATE SERIAL NUMBER</LabelElement>
-            <p>eg: xx/xxxx/xxxx</p>
             <SearchWrapper>
               <SearchInput
                 placeholder="Search..."
@@ -116,12 +97,59 @@ const Admin = () => {
               </SearchButton>
             </SearchWrapper>
           </FormContainer>
-        </CenteredContainer>
-        {filePath && (
-          <ShowImage filePath={filePath} assignFilePath={assignFilePath} />
-        )}
-        <GetAllImages triggerFetchData={triggerFetchData} />
-      </div>
+          <ButtonElement
+            backgruoundcolor="#DD0023"
+            style={{
+              fontFamily: "Poppins",
+              fontSize: "16px",
+              padding: "5px 10px",
+              height: "30px",
+              fontWeight: "bold",
+            }}
+            onClick={logout}
+          >
+            LOG OUT
+          </ButtonElement>
+        </HeaderContainer>
+        <AdminSideparAndImagePar>
+          <SidePar>
+            <FormContainer onSubmit={handleSubmit}>
+              <LabelElement>CERTIFICATE & PRODUCT SERIAL NUMBER</LabelElement>
+              <InputElement
+                onChange={(e) => setSerialNumber(e.target.value)}
+                placeholder="SERIAL NUMBER"
+                value={serialNumber}
+              />
+              <LabelElement>CERTIFICATE</LabelElement>
+              <InputElement
+                onChange={(e) => setFile(e.target.files[0])}
+                type="file"
+                ref={fileInputRef}
+              />
+              <CenteredContainer>
+                <ButtonElement backgruoundcolor="green" type="submit">
+                  Add
+                </ButtonElement>
+              </CenteredContainer>
+            </FormContainer>
+          </SidePar>
+          
+          <ImageTablesContainer>
+          <GetAllImages triggerFetchData={triggerFetchData} />
+         
+          </ImageTablesContainer>
+        </AdminSideparAndImagePar>
+      </AdminBg>
+      {filePath && (
+            <ShowImage filePath={filePath} assignFilePath={assignFilePath} />
+          )}
+      <ToastContainer
+        position="top-center"
+        style={{
+          top: "50%",
+          zIndex: 9999,
+        }}
+      />
     </>
   );
 };

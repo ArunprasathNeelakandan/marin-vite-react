@@ -36,16 +36,12 @@ export const ButtonElement = styled.button`
 `;
 
 export const FormContainer = styled.form`
-  border: solid 2px #fff;
   max-width: fit-content;
-  padding: 20px 40px;
-  margin: 10px auto;
-  box-shadow: 10px 20px 20px rgba(0, 0, 0, 0.5);
+  margin: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #1A3059;
-  flex-shrink: 0;
+  width:90%;
   color: #fff;
   text-align: center;
   border-radius: 15px; 
@@ -64,6 +60,7 @@ export const CenteredContainer = styled.div`
   width: 100%;
   flex-wrap: wrap;
   margin: 10px auto;
+  postion: relative;
 `;
 
 export const HomeContainer = styled.div`
@@ -73,4 +70,32 @@ export const HomeContainer = styled.div`
     background-image: url("../assets/bg-ship.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+`
+const shack = keyframes`
+  0% {
+    transform: translateX(-100%); /* Start off-screen and rotated */
+    opacity: 0; /* Start invisible */
+  }
+     70% {
+    transform: translateX(+30px); /* Start off-screen and rotated */
+    opacity: 0.9; /* Start invisible */
+  }
+  100% {
+    transform: translateX(0) ; /* End at normal position with no rotation */
+    opacity: 1; /* Fully visible */
+  }
+`;
+
+export const LogoInput = styled.img`
+    height: 60px;
+    transition: 0.2s;
+    margin:20px 0px 20px 0px;
+    &:hover{
+    transform: scale(1.1);
+    transition-duration: 0.2s; 
+    }
+`
+export const RowCenterContainer = styled.div`
+    display:flex;
+    justify-content: center;
 `

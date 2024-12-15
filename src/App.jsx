@@ -17,7 +17,7 @@ function App() {
   // };
 
   const ProtectedRoute = () => {
-    const token = Cookies.get('jwt_token');
+    const token = Cookies.get(process.env.JWT_COOKIE_NMAE);
     return token ? <Outlet /> : <Navigate to="/login" replace />;
   };
 

@@ -20,7 +20,7 @@ export const uploadFile = async (formData) => {
   try {
     const response = await api.post("/file/upload", formData, {
       headers: {
-        Authorization: `Bearer ${Cookies.get("jwt_token")}`,
+        Authorization: `Bearer ${Cookies.get(process.env.JWT_COOKIE_NMAE)}`,
         "Content-Type": "multipart/form-data",
       },
     });
@@ -40,7 +40,7 @@ export const getImages = async (currentPage, itemsPerPage) => {
     const response = await api.get("/file/images", {
       params: { page: currentPage, limit: itemsPerPage },
       headers: {
-        Authorization: `Bearer ${Cookies.get("jwt_token")}`,
+        Authorization: `Bearer ${Cookies.get(process.env.JWT_COOKIE_NMAE)}`,
       },
     });
 
@@ -55,7 +55,7 @@ export const deleteFile = async (serialNumber) => {
     const response = await api.delete("/file/images", {
       data: { serialNumber },
       headers: {
-        Authorization: `Bearer ${Cookies.get("jwt_token")}`,
+        Authorization: `Bearer ${Cookies.get(process.env.JWT_COOKIE_NMAE)}`,
       },
     });
     return { success: true, message: response.data.message };
