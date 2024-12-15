@@ -1,14 +1,10 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { data } from "react-router-dom";
 
-const jwtToken = Cookies.get("jwt_token");
+
 
 export const api = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,
-  headers: {
-    Authorization: `Bearer ${jwtToken}`,
-  },
 });
 
 export const login = async (username, password) => {
@@ -20,11 +16,11 @@ export const login = async (username, password) => {
   }
 };
 
-export const uploadFile = async (formData, jwtToken) => {
+export const uploadFile = async (formData) => {
   try {
     const response = await api.post("/file/upload", formData, {
       headers: {
-        Authorization: `Bearer ${jwtToken}`,
+        Authorization: `Bearer ${Cookies.get("jwt_token")}`,
         "Content-Type": "multipart/form-data",
       },
     });
@@ -44,7 +40,7 @@ export const getImages = async (currentPage, itemsPerPage) => {
     const response = await api.get("/file/images", {
       params: { page: currentPage, limit: itemsPerPage },
       headers: {
-        Authorization: `Bearer ${jwtToken}`,
+        Authorization: `Bearer ${Cookies.get("jwt_token")}`,
       },
     });
 
@@ -59,7 +55,7 @@ export const deleteFile = async (serialNumber) => {
     const response = await api.delete("/file/images", {
       data: { serialNumber },
       headers: {
-        Authorization: `Bearer ${jwtToken}`,
+        Authorization: `Bearer ${Cookies.get("jwt_token")}`,
       },
     });
     return { success: true, message: response.data.message };

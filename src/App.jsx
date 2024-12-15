@@ -1,14 +1,24 @@
 import Login from './Components/Login'
-import { BrowserRouter,Routes,Route,Navigate } from 'react-router-dom'
+import { BrowserRouter,Routes,Route,Navigate,Outlet } from 'react-router-dom'
 import Admin from './Components/Admin'
 import Home from './Components/Home'
-import { isAuthenticated } from './Services/utility'
+// import { isAuthenticated } from './Services/utility'
+import Cookies from 'js-cookie'
 import './App.css'
 
+
 function App() {
+  // console.log(isAuthenticated)
+  // const ProtectedRoute = ({ children }) => { 
+  //   const token = Cookies.get('jwt_token')
+  //  return 
+
   
-  const ProtectedRoute = ({ children }) => {
-    return isAuthenticated() ? children : <Navigate to="/login" />;
+  // };
+
+  const ProtectedRoute = () => {
+    const token = Cookies.get('jwt_token');
+    return token ? <Outlet /> : <Navigate to="/login" replace />;
   };
 
   return (
@@ -17,9 +27,9 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<Home/>}/>
-      <Route path='/admin' element={<ProtectedRoute>
-        <Admin/>
-      </ProtectedRoute>}/>
+      <Route  element={<ProtectedRoute/>}>
+      <Route path='/admin' element={<Admin/>}/>
+      </Route>
       <Route path='/login' element={<Login/>}/>
     </Routes>
     </BrowserRouter>

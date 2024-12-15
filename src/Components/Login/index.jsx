@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
-import{ login }from "../../Services/api";
+import { useNavigate, Navigate } from "react-router-dom";
+import { login } from "../../Services/api";
+// import { isAuthenticated } from "../../Services/utility";
 import "./index.css";
 
 const Login = (props) => {
@@ -10,7 +11,7 @@ const Login = (props) => {
   const [isError, setIsError] = useState(false);
   const [errorMsgs, setErrorMsg] = useState("");
   const navigate = useNavigate();
-  
+
   const onChangeUsername = (event) => {
     setUsername(event.target.value);
   };
@@ -33,19 +34,19 @@ const Login = (props) => {
 
   const submitForm = async (event) => {
     event.preventDefault();
-    const data =await login(username,password);
-       if(data.jwtToken) {
-        onSubmitSuccess(data.jwtToken)
-       }else{
-        console.log(data.message)
-        onSubmitFailure(data.message)
-       }
+    const data = await login(username, password);
+    if (data.jwtToken) {
+      onSubmitSuccess(data.jwtToken)
+    } else {
+      console.log(data.message)
+      onSubmitFailure(data.message)
+    }
   };
-  
- 
+
   const renderUsernameField = () => {
     return (
       <>
+        {Cookies.get('jwt_token') && (<Navigate to='/admin' replace />)}
         <label className="input-label" htmlFor="username">
           USER NAME
         </label>
