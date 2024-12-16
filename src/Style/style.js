@@ -59,17 +59,12 @@ export const CenteredContainer = styled.div`
   align-items: center;
   width: 100%;
   flex-wrap: wrap;
-  margin: 10px auto;
+  margin: 5px auto;
   postion: relative;
 `;
 
 export const HomeContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 100vh;  /* Take the full height of the viewport */
-    background-image: url("../assets/bg-ship.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    padding: 30px 5% 30px 5%;
 `
 const shack = keyframes`
   0% {
@@ -87,7 +82,8 @@ const shack = keyframes`
 `;
 
 export const LogoInput = styled.img`
-    height: 60px;
+    height: 50px;
+    width:50px;
     transition: 0.2s;
     margin:20px 0px 20px 0px;
     &:hover{
@@ -97,6 +93,74 @@ export const LogoInput = styled.img`
 `
 export const RowCenterContainer = styled.div`
     display:flex;
-    justify-content: flex-end;
-    padding-right: 10%;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
 `
+
+export const HeaderContainer = styled.div`
+     background-color: azure;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    position: stickey; 
+    top: 0%;
+    width: 100vw;
+    z-index: 1;
+`
+
+export const PageContainer = styled.div`
+  padding: 5px 10px;
+`
+
+export const ListPageArrowContainer =styled.div `
+    display: flex;
+    justify-content: flex-end;
+    padding-right:5%;  
+`
+
+export const SearchIcon = styled.button`
+  display: flex;
+  font-size: 20px;
+  color: #aaa;
+  align-Items: center
+  justify-content: center;
+  background-color: white;
+  padding: 4px 10px;
+  margin: 11px 0px 20px;
+  cursor: pointer;
+  border: solid 1px black;
+  
+`;
+
+
+
+
+export const SearchWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+export const SearchInput = styled.input`
+  padding: 8px;
+  border: none;
+  outline: none;
+  flex-grow: 1;
+`;
+
+export const SearchButton = styled.button`
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  &:hover{
+  background-color: green;
+  } 
+`;

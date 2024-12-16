@@ -4,12 +4,8 @@
   margin: 0px;
 }
 
-/*  */
-
-
-
 .root {
-  background-image: url('.\assets\bg.jpg');
+  background-image: url('.\assets\img3.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -19,19 +15,13 @@
 
 @media screen and (orientation: portrait) {
   .root {
-    background-image: url('.\assets\bg2.jpg');
+    /* background-image: url('.\assets\img2.jpg'); */
   }
 }
 
-.overlay-class {
-  backdrop-filter: none;
-  background: rgba(89, 107, 139, 0.259);
-  display: none;
-  background: transparent !important;
-}
 
-.aaa {
-  
-  margin-bottom: 40px;
+
+.aaa { 
+  background-color: rgba(27, 46, 91, 0.233);
 }
 

@@ -36,39 +36,39 @@ import { ButtonElement } from "../../Style/style";
 import logo from '../../assets/unique marine.png';
 import Cookies from "js-cookie";
 
-const Header = () => {
-  const navigate = useNavigate();
-  const location = useLocation(); 
+// const Header = () => {
+//   const navigate = useNavigate();
+//   const location = useLocation(); 
 
-  const logout = () => {
-    // Remove token and navigate only once
-    Cookies.remove(process.env.JWT_COOKIE_NMAE);
-    navigate('/login', { replace: true });
-  };
+//   const logout = () => {
+//     // Remove token and navigate only once
+//     Cookies.remove(process.env.JWT_COOKIE_NMAE);
+//     navigate('/login', { replace: true });
+//   };
 
-  return (
-    <HeaderContainer>
-      <Link to="/">
-        <LogoInput src={logo} />
-      </Link>
+//   return (
+//     <HeaderContainer>
+//       <Link to="/">
+//         <LogoInput src={logo} />
+//       </Link>
 
-      {location.pathname.startsWith('/admin') && (
-        <ButtonElement
-          backgruoundcolor="#DD0023"
-          style={{
-            fontFamily: "Poppins",
-            fontSize: "16px",
-            padding: "5px 10px",
-            height: "30px",
-            fontWeight: "bold",
-          }}
-          onClick={logout}
-        >
-          LOG OUT
-        </ButtonElement>
-      )}
-    </HeaderContainer>
-  );
-};
+//       {location.pathname.startsWith('/admin') && (
+//         <ButtonElement
+//           backgruoundcolor="#DD0023"
+//           style={{
+//             fontFamily: "Poppins",
+//             fontSize: "16px",
+//             padding: "5px 10px",
+//             height: "30px",
+//             fontWeight: "bold",
+//           }}
+//           onClick={logout}
+//         >
+//           LOG OUT
+//         </ButtonElement>
+//       )}
+//     </HeaderContainer>
+//   );
+// };
 
-export default Header;
+// export default Header;

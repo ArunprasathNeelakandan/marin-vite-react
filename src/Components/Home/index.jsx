@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Header from "../Header";
 import { ToastContainer, toast } from "react-toastify";
 import {
   InputElement,
@@ -8,9 +7,11 @@ import {
   LabelElement,
   HomeContainer
 } from "../../Style/style.js";
+import { RowCenterContainer,LogoInput } from "../../Style/style.js";
 
 import ShowImage from "../Show Image/index.jsx";
 import { getImageByNumber } from "../../Services/api.js";
+import logo from '../../assets/unique marine.png'
 
 const Home = () => {
   const [serialNumber, setSerialNumber] = useState("");
@@ -38,8 +39,8 @@ const Home = () => {
 
   return (
     <HomeContainer>
-      <Header />
-
+      <RowCenterContainer>
+      <LogoInput src={logo}/>
       <FormContainer onSubmit={handleSubmit}>
         <LabelElement>CERTIFICATE SERIAL NUMBER</LabelElement>
         <p>eg: xx/xxxx/xxxx</p>
@@ -50,6 +51,8 @@ const Home = () => {
         ></InputElement>
         <ButtonElement type="submit">VIEW</ButtonElement>
       </FormContainer>
+      </RowCenterContainer>
+      
       <ToastContainer
         position="top-center"
         style={{

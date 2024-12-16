@@ -1,25 +1,29 @@
 import { useState, useRef } from "react";
 import GetAllImages from "../GetAllImages/getAllImages.jsx";
+import logo from "../../assets/unique marine.png";
 import Cookies from "js-cookie";
-import logo from '../../assets/unique marine.png'
-import { AdminSideparAndImagePar, HeaderContainer,  AdminBg,  SidePar, ImageTablesContainer } from "./admin.style.js";
+import {
+  AdminSideparAndImagePar,
+  HeaderContainer,
+  AdminBg,
+  SidePar,
+  ImageTablesContainer,
+} from "../../Style/admin.style.js";
 import { ToastContainer, toast } from "react-toastify";
 import { uploadFile, getImageByNumber } from "../../Services/api.js";
 import "react-toastify/dist/ReactToastify.css";
 import ShowImage from "../Show Image/index.jsx";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import {
   SearchWrapper,
   SearchButton,
   SearchInput,
-} from "../../Style/searchbar.style.js";
-import {
   InputElement,
   CenteredContainer,
   ButtonElement,
   FormContainer,
   LabelElement,
-  LogoInput
+  LogoInput,
 } from "../../Style/style.js";
 
 const Admin = () => {
@@ -34,10 +38,8 @@ const Admin = () => {
 
   const logout = () => {
     Cookies.remove(process.env.JWT_COOKIE_NMAE);
-    navigate('/login', { replace: true });
+    navigate("/login", { replace: true });
   };
-
-  const jwtToken = Cookies.get(process.env.JWT_COOKIE_NMAE);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -82,7 +84,10 @@ const Admin = () => {
     <>
       <AdminBg>
         <HeaderContainer>
-          <LogoInput src={logo} />
+          <Link to="/">
+            <LogoInput src={logo} />
+          </Link>
+
           <FormContainer onSubmit={handleSearchSubmit}>
             <SearchWrapper>
               <SearchInput
@@ -133,16 +138,15 @@ const Admin = () => {
               </CenteredContainer>
             </FormContainer>
           </SidePar>
-          
+
           <ImageTablesContainer>
-          <GetAllImages triggerFetchData={triggerFetchData} />
-         
+            <GetAllImages triggerFetchData={triggerFetchData} />
           </ImageTablesContainer>
         </AdminSideparAndImagePar>
       </AdminBg>
       {filePath && (
-            <ShowImage filePath={filePath} assignFilePath={assignFilePath} />
-          )}
+        <ShowImage filePath={filePath} assignFilePath={assignFilePath} />
+      )}
       <ToastContainer
         position="top-center"
         style={{

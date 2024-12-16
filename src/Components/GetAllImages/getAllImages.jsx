@@ -1,18 +1,13 @@
 import { useEffect, useState } from "react";
 import { getImages, deleteFile } from "../../Services/api";
 import './hide.css'
-
-import {
-  PageContainer,
-  ListPageArrowContainer
-} from "../../Style/ImageList.style";
 import ShowImage from '../Show Image/index'
 import { toast } from "react-toastify";
-import { ButtonElement, RowCenterContainer } from "../../Style/style";
+import { ButtonElement, PageContainer,ListPageArrowContainer} from "../../Style/style";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { TableContainer, StyledTable } from "../Admin/admin.style";
+import { TableContainer, StyledTable } from "../../Style/admin.style";
 
 const GetAllImages = (props) => {
   const [images, setImages] = useState([]);
@@ -138,19 +133,17 @@ const GetAllImages = (props) => {
           </tbody>
         </StyledTable>
       </TableContainer>
-      <RowCenterContainer>
-        <ListPageArrowContainer>
+      <ListPageArrowContainer>
           <ButtonElement id="left" onClick={prevPage} disabled={isPrevDisabled}>
             <FaArrowLeft />
           </ButtonElement>
           <PageContainer>
-            <h1 style={{ color: "#fff" }}>{currentPage}</h1>
+            <h1 style={{ color: "" }}>{currentPage}</h1>
           </PageContainer>
           <ButtonElement id="right" onClick={nextPage} disabled={isNextDisabled}>
             <FaArrowRight />
           </ButtonElement>
         </ListPageArrowContainer>
-      </RowCenterContainer>
 
       {
         filePath && (<ShowImage filePath={filePath} assignFilePath={assignFilePath} />)
